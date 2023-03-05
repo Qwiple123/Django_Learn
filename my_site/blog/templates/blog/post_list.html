@@ -1,6 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloock&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Qwiple Blog</title>
@@ -9,15 +14,23 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <div>
-        <h1><a href ='/'>Qwiple Blog</a></h1>
+    <div class="page_header">
+        <h1 class="header"><a href ='/'>Qwiple Blog</a></h1>
+    </div class='post'>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        <p>Опубликованно: {{ post.published_date }}</p>
+                    </div>
+                <h1><a href="">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+                 </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% for post in posts %}
-    <div>
-    <p>published: {{ post.published_date }}</p>
-    <h1><a href=''>{{post.title}}</a></h1>
-    <p>{{ post.text|linebreaksbr }}</p>
-    </div>
-    {% endfor %}
 </body>
 </html>
