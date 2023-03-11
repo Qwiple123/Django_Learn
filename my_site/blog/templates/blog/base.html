@@ -15,7 +15,12 @@
 <body>
     <div class="page_header">
         {% if user.is_authenticated %}
+            <p>{{ user.username }}</p>
             <a href="{% url 'post_new' %}" class="top-menu"><span class='glyphicon glyphicon-plus'></span></a>
+            <p><a href="{% url 'logout' %}">Log out</a></p>
+        {% else %}
+        <p><a href="{% url 'login' %}">Log in</a></p>
+        <p><a href="{% url 'signup' %}">Sign Up</a></p>
         {% endif %}
         <h1><a href="/">Qwiple Blog</a></h1>
     </div>
