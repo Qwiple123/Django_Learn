@@ -15,7 +15,7 @@
 <body>
     <div class="page_header">
         {% if user.is_authenticated %}
-            <p>{{ user.username }}</p>
+            <p><a href="{% url 'profile' %}">{{ user.username }}</a></p>
             <a href="{% url 'post_new' %}" class="top-menu"><span class='glyphicon glyphicon-plus'></span></a>
             <p><a href="{% url 'logout' %}">Log out</a></p>
         {% else %}
