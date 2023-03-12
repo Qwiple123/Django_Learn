@@ -2,12 +2,20 @@
     {% block content %}
     {% for post in posts %}
         <div class="post">
-            <div class="date">
-                <p>Опубликованно: {{ post.published_date }}</p>
-            </div>
             <h1><a href={% url 'post_detail' pk=post.pk %}>{{ post.title }}</a></h1>
             <p>{{ post.text|linebreaksbr }}</p>
             <p><strong>Автор: </strong>{{ post.author }}</p>
+            
+            {% if post.edit_date %}
+            <div>
+                <p><strong>Опубликованно :</strong>{{ post.published_date}}</p>
+                <p><strong>Отредактированно :</strong>{{ post.edit_date}}</p>
+            </div>
+            {% else %}
+            <div>
+                <p><strong>Опубликованно :</strong>{{ post.published_date}}</p>
+            </div>
         </div>
+            {% endif %}
     {% endfor %}
 {% endblock %}
