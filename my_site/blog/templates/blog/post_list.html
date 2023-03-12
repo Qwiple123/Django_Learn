@@ -8,14 +8,17 @@
             
             {% if post.edit_date %}
             <div>
-                <p><strong>Опубликованно :</strong>{{ post.published_date}}</p>
+                <p><strong>Опубликованно :</strong>{{ post.published_date}}</p
                 <p><strong>Отредактированно :</strong>{{ post.edit_date}}</p>
             </div>
             {% else %}
             <div>
                 <p><strong>Опубликованно :</strong>{{ post.published_date}}</p>
             </div>
-        </div>
             {% endif %}
+            <button><a href={% url 'like_post' pk=post.pk %}>Like</a></button>
+            {{ post.likes.count }}
+        </div>
+            
     {% endfor %}
 {% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect
-from .models import Post, Comment
+from .models import Post, LikedPost
 from .forms import PostForm, CommentForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 
@@ -59,4 +61,16 @@ def view_profile(request):
     posts = Post.objects.filter(author = request.user)
     return render(request, 'blog/profile.html', {'posts': posts})
 
+def like_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
 
+    liked_post, created = LikedPost.objects.get_or_create(
+        post = post,
+        user = request.user
+    )
+    if not created:
+        liked_post.delete()
+    else:
+        liked_post.save()
+
+    return redirect('post_list')
